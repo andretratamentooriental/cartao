@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>André — Tratamento Oriental</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <!-- CSS Customizado -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Cartão virtual premium do André — Tratamento Oriental. Equilíbrio, saúde e bem-estar através de técnicas tradicionais orientais.">
+  <meta property="og:title" content="André — Tratamento Oriental">
+  <meta property="og:description" content="Cartão virtual responsivo com informações sobre Acupuntura, Ventosaterapia, Auriculoterapia, Massoterapia, Moxabustão e Tuiná.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo.png">
+</head>
+<body>
+
+  <!-- Tela de Carregamento (Preloader 5s) -->
+  <div id="loader-screen" class="loader-screen">
+    <div class="loader-content">
+      <div class="loader-logo-wrapper">
+        <img src="logo.png" alt="André Tratamento Oriental" class="loader-logo">
+      </div>
+      <p class="loader-slogan font-elegant">Aqui começa a sua saúde</p>
+      <div class="loader-bar-container">
+        <div class="loader-bar-fill" id="loader-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay de Fundo -->
+  <div class="bg-overlay"></div>
+
+  <!-- Cartão de Visita Principal -->
+  <main class="card-container glass-effect" id="main-card">
+    
+    <!-- Cabeçalho / Logo -->
+    <header class="header-section">
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="André Tratamento Oriental" class="logo-image">
+      </div>
+      <h1 class="slogan font-elegant">Equilíbrio e Bem-Estar</h1>
+    </header>
+
+    <!-- Menu de Botões Interativos -->
+    <nav class="menu-buttons">
+      
+      <!-- Sobre o Atendimento -->
+      <button class="btn-menu glass-effect" onclick="openModal('about')">
+        <!-- Ícone Lucide Info -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span class="btn-text">Sobre o Atendimento</span>
+      </button>
+
+      <!-- Acupuntura -->
+      <button class="btn-menu glass-effect" onclick="openModal('acupuntura')">
+        <!-- Ícone Agulha de Acupuntura -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="7" x2="12" y2="22"></line>
+          <rect x="10.5" y="2" width="3" height="5" rx="0.5"></rect>
+          <line x1="10.5" y1="3.5" x2="13.5" y2="3.5"></line>
+          <line x1="10.5" y1="5" x2="13.5" y2="5"></line>
+        </svg>
+        <span class="btn-text">Acupuntura</span>
+      </button>
+
+      <!-- Ventosaterapia -->
+      <button class="btn-menu glass-effect" onclick="openModal('ventosaterapia')">
+        <!-- Ícone Círculos Concêntricos -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+        <span class="btn-text">Ventosaterapia</span>
+      </button>
+
+      <!-- Auriculoterapia -->
+      <button class="btn-menu glass-effect" onclick="openModal('auriculoterapia')">
+        <!-- Ícone Orelha/Audção -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 3a5 5 0 0 0-8 0C5.5 4.5 4 7 4 10c0 3.5 2.5 6 6 8a4 4 0 0 1 2 3v1"></path>
+          <path d="M12 14.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+        </svg>
+        <span class="btn-text">Auriculoterapia</span>
+      </button>
+
+      <!-- Massoterapia -->
+      <button class="btn-menu glass-effect" onclick="openModal('massoterapia')">
+        <!-- Ícone Lucide Mão -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"></path>
+          <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
+          <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v7.5"></path>
+          <path d="M6 13V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v9a6 6 0 0 0 6 6h3a8 8 0 0 0 8-8v-3a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path>
+        </svg>
+        <span class="btn-text">Massoterapia</span>
+      </button>
+
+      <!-- Moxabustão -->
+      <button class="btn-menu glass-effect" onclick="openModal('moxabustao')">
+        <!-- Ícone Lucide Chama -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+        </svg>
+        <span class="btn-text">Moxabustão</span>
+      </button>
+
+      <!-- Tuiná -->
+      <button class="btn-menu glass-effect" onclick="openModal('tuina')">
+        <!-- Ícone Fluxo/Circular -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+          <path d="M12 6a6 6 0 0 0-6 6h12a6 6 0 0 0-6-6z"></path>
+        </svg>
+        <span class="btn-text">Tuiná</span>
+      </button>
+
+      <!-- Agendar Atendimento (WhatsApp CTA) -->
+      <button class="btn-menu btn-cta" onclick="startWhatsAppGeneralChat()">
+        <!-- Ícone Lucide Mensagem -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        <span class="btn-text">Agendar Atendimento</span>
+      </button>
+
+    </nav>
+  </main>
+
+  <!-- POPUPS (MODAIS) -->
+
+  <!-- Popup: Sobre o Atendimento -->
+  <div class="modal-overlay" id="modal-about" onclick="closeModalOnOverlay(event, 'about')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('about')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Sobre o Atendimento</h2>
+        <p class="modal-text">No André — Tratamento Oriental, diferentes técnicas da tradição oriental são utilizadas de maneira individualizada, respeitando as necessidades e características de cada pessoa.</p>
+        <p class="modal-text" style="font-weight: 600; color: var(--color-gold); text-align: center; font-size: 0.8rem; letter-spacing: 1px;">ACUPUNTURA • VENTOSATERAPIA • AURICULOTERAPIA • MASSOTERAPIA • MOXABUSTÃO • TUINÁ</p>
+        <p class="modal-text">Uma experiência de cuidado que une técnicas tradicionais, conhecimento e atenção individualizada para proporcionar momentos de equilíbrio, relaxamento e bem-estar.</p>
+        <p class="modal-text" style="font-family: var(--font-serif-display); font-weight: bold; text-align: center; color: var(--color-gold); font-size: 1.05rem; line-height: 1.4; margin-top: 24px; margin-bottom: 24px;">SEU CORPO PEDE CUIDADO.<br>SUA MENTE TAMBÉM.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppGeneralChat()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Falar no WhatsApp
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('about')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Acupuntura -->
+  <div class="modal-overlay" id="modal-acupuntura" onclick="closeModalOnOverlay(event, 'acupuntura')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('acupuntura')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Acupuntura</h2>
+        <p class="modal-text">A acupuntura é uma técnica tradicional da medicina chinesa que utiliza agulhas muito finas aplicadas em pontos específicos do corpo.</p>
+        <p class="modal-text">A partir da visão da medicina tradicional chinesa, esses pontos estão relacionados aos meridianos por onde circula o Qi (energia vital). A estimulação adequada busca favorecer o equilíbrio energético do organismo.</p>
+        <p class="modal-text">Além da abordagem energética, a acupuntura também é estudada por seus efeitos sobre o sistema nervoso, circulação, percepção da dor e relaxamento.</p>
+        <p class="modal-text">É uma técnica utilizada em diferentes contextos, podendo contribuir para relaxamento, bem-estar, redução de tensões e manejo de dores, sempre considerando a avaliação individual de cada pessoa.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppTreatment('acupuntura')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Agendar Acupuntura
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('acupuntura')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Ventosaterapia -->
+  <div class="modal-overlay" id="modal-ventosaterapia" onclick="closeModalOnOverlay(event, 'ventosaterapia')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('ventosaterapia')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Ventosaterapia</h2>
+        <p class="modal-text">A ventosaterapia utiliza copos ou ventosas posicionados sobre a pele, criando uma pressão negativa controlada.</p>
+        <p class="modal-text">Essa sucção provoca uma mobilização dos tecidos na região trabalhada e pode favorecer a circulação sanguínea local, além de proporcionar sensação de relaxamento e aliviar a percepção de tensão muscular.</p>
+        <p class="modal-text">Na tradição oriental, a técnica também é utilizada como recurso para auxiliar na harmonização e movimentação do Qi e do sangue.</p>
+        <p class="modal-text">A intensidade e o tempo de aplicação são definidos de acordo com cada pessoa e objetivo do atendimento.</p>
+        <p class="modal-text">É comum que a ventosa deixe marcas temporárias na pele. Elas fazem parte da resposta local à sucção e tendem a desaparecer naturalmente.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppTreatment('ventosaterapia')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Agendar Ventosaterapia
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('ventosaterapia')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Auriculoterapia -->
+  <div class="modal-overlay" id="modal-auriculoterapia" onclick="closeModalOnOverlay(event, 'auriculoterapia')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('auriculoterapia')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Auriculoterapia</h2>
+        <p class="modal-text">A auriculoterapia utiliza a orelha como uma área de estimulação terapêutica, trabalhando pontos específicos relacionados, dentro de diferentes abordagens, às diversas regiões e funções do organismo.</p>
+        <p class="modal-text">Os pontos podem ser estimulados por diferentes métodos, como sementes, esferas, agulhas ou outros recursos, conforme a avaliação e a técnica utilizada pelo profissional.</p>
+        <p class="modal-text">Na visão da medicina tradicional chinesa, a orelha possui uma relação especial com os meridianos e com o equilíbrio energético do corpo.</p>
+        <p class="modal-text">É uma técnica que pode ser utilizada isoladamente ou como complemento a outros tratamentos, buscando favorecer relaxamento, equilíbrio e bem-estar.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppTreatment('auriculoterapia')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Agendar Auriculoterapia
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('auriculoterapia')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Massoterapia -->
+  <div class="modal-overlay" id="modal-massoterapia" onclick="closeModalOnOverlay(event, 'massoterapia')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('massoterapia')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Massoterapia</h2>
+        <p class="modal-text">A massoterapia reúne diferentes técnicas de manipulação dos tecidos corporais, utilizando movimentos, pressões e manobras específicas.</p>
+        <p class="modal-text">O trabalho pode envolver músculos, tecidos superficiais e outras estruturas, de acordo com a técnica escolhida e a necessidade de cada pessoa.</p>
+        <p class="modal-text">Além de proporcionar um momento de cuidado e relaxamento, a massoterapia pode contribuir para reduzir tensões musculares, melhorar a percepção corporal, favoriser a circulação local e promover sensação de bem-estar.</p>
+        <p class="modal-text">Cada atendimento pode ser adaptado à condição e às necessidades individuais do cliente.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppTreatment('massoterapia')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Agendar Massoterapia
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('massoterapia')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Moxabustão -->
+  <div class="modal-overlay" id="modal-moxabustao" onclick="closeModalOnOverlay(event, 'moxabustao')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('moxabustao')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Moxabustão</h2>
+        <p class="modal-text">A moxabustão é uma técnica tradicional chinesa que utiliza o calor produzido pela queima da moxa, geralmente preparada a partir da planta Artemisia argyi (artemísia).</p>
+        <p class="modal-text">O calor é aplicado de maneira controlada próximo a determinados pontos ou regiões do corpo, proporcionando uma sensação de aquecimento profundo e relaxamento.</p>
+        <p class="modal-text">Na medicina tradicional chinesa, a moxabustão está associada ao estímulo do fluxo de Qi e sangue, sendo tradicionalmente utilizada para trabalhar padrões relacionados ao frio e à deficiência energética.</p>
+        <p class="modal-text">É uma técnica que exige controle adequado da temperatura, distância e tempo de aplicação, tornando a avaliação individual fundamental para um atendimento seguro.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppTreatment('moxabustao')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Agendar Moxabustão
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('moxabustao')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Tuiná -->
+  <div class="modal-overlay" id="modal-tuina" onclick="closeModalOnOverlay(event, 'tuina')">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal('tuina')" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Tuiná</h2>
+        <p class="modal-text">A Tuiná é uma tradicional técnica terapêutica chinesa que combina massagem, pressão, deslizamentos, amassamentos e outras manobras específicas realizadas sobre músculos, tecidos e pontos do corpo.</p>
+        <p class="modal-text">Diferentemente de uma massagem exclusivamente voltada ao relaxamento, a Tuiná possui uma abordagem mais direcionada, utilizando diferentes técnicas de acordo com a avaliação do praticante.</p>
+        <p class="modal-text">Dentro da medicina tradicional chinesa, busca-se trabalhar a circulação do Qi e do sangue pelos meridianos, favorecendo o equilíbrio corporal.</p>
+        <p class="modal-text">A técnica pode proporcionar relaxamento, redução da sensação de tensão muscular, maior percepção corporal e bem-estar, sendo adaptada conforme as necessidades de cada pessoa.</p>
+        <div class="modal-actions">
+          <button class="btn-action glass-effect" onclick="startWhatsAppTreatment('tuina')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            Agendar Tuiná
+          </button>
+          <button class="btn-action btn-back" onclick="closeModal('tuina')">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ FIXO -->
+  <footer class="fixed-footer">
+    <div class="social-links">
+      <!-- WhatsApp Icon -->
+      <a href="https://wa.me/5515981031798" target="_blank" rel="noopener noreferrer" class="social-icon" title="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+      </a>
+    </div>
+    <div class="copyright">
+      &copy; André Tratamento Oriental &bull; 2026
+      <br>
+      Criado por <a href="https://www.instagram.com/idia_marketingvisual/" target="_blank" rel="noopener noreferrer" class="credit-link">ID:IA Marketing Visual</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript Interativo -->
+  <script src="script.js" defer></script>
+</body>
+</html>
