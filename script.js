@@ -10,36 +10,28 @@ const CONFIG = {
 };
 
 /**
- * Inicialização da Tela de Carregamento (Preloader de 5 segundos)
+ * Inicialização da Tela de Carregamento (Preloader de 5 segundos Sem Flicker)
  * É executada SEMPRE que a página é carregada ou atualizada.
  */
-document.addEventListener('DOMContentLoaded', () => {
+function initPreloader() {
   const loaderScreen = document.getElementById('loader-screen');
-  const loaderBarFill = document.getElementById('loader-bar-fill');
+  if (!loaderScreen) return;
 
-  if (loaderScreen && loaderBarFill) {
-    // Bloqueia rolagem do body durante a intro
-    document.body.style.overflow = 'hidden';
+  // Garante bloqueio da rolagem do body durante a intro
+  document.body.style.overflow = 'hidden';
 
-    const durationMs = 5000; // 5 segundos exatos
-    const intervalMs = 40;
-    let elapsedMs = 0;
+  // Após 5 segundos exatos, faz o fade-out e desbloqueia a rolagem
+  setTimeout(() => {
+    loaderScreen.classList.add('fade-out');
+    document.body.style.overflow = '';
+  }, 5000);
+}
 
-    const timer = setInterval(() => {
-      elapsedMs += intervalMs;
-      const progressPercent = Math.min((elapsedMs / durationMs) * 100, 100);
-      loaderBarFill.style.width = `${progressPercent}%`;
-
-      if (elapsedMs >= durationMs) {
-        clearInterval(timer);
-        // Oculta a tela com animação de fade-out
-        loaderScreen.classList.add('fade-out');
-        // Restaura rolagem normal da página
-        document.body.style.overflow = '';
-      }
-    }, intervalMs);
-  }
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPreloader);
+} else {
+  initPreloader();
+}
 
 // Mapeamento de mensagens do WhatsApp por tratamento
 const TREATMENT_MESSAGES = {
