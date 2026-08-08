@@ -10,7 +10,7 @@ const CONFIG = {
 };
 
 /**
- * Inicialização da Tela de Carregamento (Preloader de 5 segundos Sem Flicker)
+ * Inicialização da Tela de Carregamento (Preloader de 5 segundos Sem Flicker para Chrome/Brave)
  * É executada SEMPRE que a página é carregada ou atualizada.
  */
 function initPreloader() {
@@ -20,8 +20,9 @@ function initPreloader() {
   // Garante bloqueio da rolagem do body durante a intro
   document.body.style.overflow = 'hidden';
 
-  // Após 5 segundos exatos, faz o fade-out e desbloqueia a rolagem
+  // Após 5 segundos exatos, revela o conteúdo e faz o fade-out do preloader
   setTimeout(() => {
+    document.body.classList.add('content-ready');
     loaderScreen.classList.add('fade-out');
     document.body.style.overflow = '';
   }, 5000);
