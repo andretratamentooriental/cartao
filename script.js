@@ -10,7 +10,7 @@ const CONFIG = {
 };
 
 /**
- * Inicialização da Tela de Carregamento (Preloader de 5 segundos Sem Flicker para Chrome/Brave)
+ * Inicialização da Tela de Abertura Estática (3 segundos)
  * É executada SEMPRE que a página é carregada ou atualizada.
  */
 function initPreloader() {
@@ -20,12 +20,12 @@ function initPreloader() {
   // Garante bloqueio da rolagem do body durante a intro
   document.body.style.overflow = 'hidden';
 
-  // Após 5 segundos exatos, revela o conteúdo e faz o fade-out do preloader
+  // Após 3 segundos exatos, revela o conteúdo e faz o fade-out da tela de abertura
   setTimeout(() => {
     document.body.classList.add('content-ready');
     loaderScreen.classList.add('fade-out');
     document.body.style.overflow = '';
-  }, 5000);
+  }, 3000);
 }
 
 if (document.readyState === 'loading') {
