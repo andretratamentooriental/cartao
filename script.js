@@ -10,6 +10,30 @@ const CONFIG = {
 };
 
 /**
+ * Oculta proativamente a barra de navegação dos navegadores (Fullscreen API + Mobile Auto-Scroll)
+ */
+function hideBrowserNavigationBar() {
+  // 1. Rola 1px em navegadores mobile para recolher a barra de URL do Safari e Chrome
+  setTimeout(() => {
+    window.scrollTo({ top: 1, behavior: 'smooth' });
+  }, 150);
+
+  // 2. Tenta entrar em Modo Tela Cheia (Fullscreen) no primeiro toque do usuário
+  const doc = document.documentElement;
+  const requestFS = doc.requestFullscreen || doc.webkitRequestFullscreen || doc.mozRequestFullScreen || doc.msRequestFullscreen;
+
+  if (requestFS && !document.fullscreenElement && !document.webkitFullscreenElement) {
+    requestFS.call(doc).catch(() => {
+      // Ignora se o navegador restritivo exigir confirmação manual
+    });
+  }
+}
+
+// Dispara a tentativa no primeiro toque do usuário em qualquer parte da tela
+document.addEventListener('touchstart', hideBrowserNavigationBar, { once: true });
+document.addEventListener('click', hideBrowserNavigationBar, { once: true });
+
+/**
  * Inicialização da Tela de Abertura Estática (3 segundos)
  * É executada SEMPRE que a página é carregada ou atualizada.
  */
@@ -25,6 +49,7 @@ function initPreloader() {
     document.body.classList.add('content-ready');
     loaderScreen.classList.add('fade-out');
     document.body.style.overflow = '';
+    hideBrowserNavigationBar();
   }, 3000);
 }
 

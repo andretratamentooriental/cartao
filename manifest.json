@@ -1,0 +1,22 @@
+{
+  "name": "André — Tratamento Oriental",
+  "short_name": "André Oriental",
+  "description": "Cartão Virtual Premium — André Tratamento Oriental",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "750x750",
+      "type": "image/png"
+    }
+  ]
+}
