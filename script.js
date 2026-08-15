@@ -10,12 +10,36 @@ const CONFIG = {
 };
 
 /**
- * Inicialização da Tela de Abertura Estática (3 segundos)
- * É executada SEMPRE que a página é carregada ou atualizada.
+ * Inicialização da Tela de Abertura Estática (3 segundos).
+ * A intro é exibida apenas na PRIMEIRA visita (navegador).
+ * Em reacessos, o cartão aparece diretamente.
  */
+const INTRO_STORAGE_KEY = 'andre-oriental-intro-shown-v1';
+
 function initPreloader() {
   const loaderScreen = document.getElementById('loader-screen');
   if (!loaderScreen) return;
+
+  let introAlreadyShown = false;
+  try {
+    introAlreadyShown = localStorage.getItem(INTRO_STORAGE_KEY) === '1';
+  } catch (err) {
+    // Armazenamento indisponível: segue como primeira visita
+  }
+
+  // Já viu a intro: remove a tela de abertura e revela o cartão direto
+  if (introAlreadyShown) {
+    loaderScreen.remove();
+    document.body.classList.add('content-ready');
+    return;
+  }
+
+  // Primeira visita: registra e reproduz a intro completa
+  try {
+    localStorage.setItem(INTRO_STORAGE_KEY, '1');
+  } catch (err) {
+    // Armazenamento indisponível: ignora
+  }
 
   // Garante bloqueio da rolagem do body durante a intro
   document.body.style.overflow = 'hidden';
@@ -52,6 +76,7 @@ const TREATMENT_MESSAGES = {
 function openModal(modalId) {
   const modal = document.getElementById(`modal-${modalId}`);
   if (modal) {
+    modal.classList.remove('closing');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -59,19 +84,26 @@ function openModal(modalId) {
 
 /**
  * Fecha um popup/modal específico pelo ID.
- * Remove a classe 'active' e restaura a rolagem do body.
+ * Reproduz a animação reversa de fechamento e remove a classe 'active'.
  * @param {string} modalId - O identificador do modal
  */
 function closeModal(modalId) {
   const modal = document.getElementById(`modal-${modalId}`);
-  if (modal) {
+  if (!modal) return;
+  if (modal.classList.contains('closing')) return;
+
+  modal.classList.add('closing');
+
+  // Aguarda a animação reversa terminar para então ocultar de fato
+  setTimeout(() => {
+    modal.classList.remove('closing');
     modal.classList.remove('active');
     // Só restaura overflow do body se não houver outros modais ativos
     const activeModals = document.querySelectorAll('.modal-overlay.active');
     if (activeModals.length === 0) {
       document.body.style.overflow = '';
     }
-  }
+  }, 400);
 }
 
 /**
