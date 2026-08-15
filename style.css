@@ -371,7 +371,7 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 
 .btn-menu {
   width: 100%;
-  padding: 12px 8px;
+  padding: 10px 8px;
   border-radius: 14px;
   background: linear-gradient(150deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.09) 100%);
   backdrop-filter: blur(14px);
@@ -385,12 +385,12 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   cursor: pointer;
   transition: all 0.3s var(--ease-spring);
   text-align: center;
   outline: none;
-  min-height: 70px;
+  height: 84px;
   position: relative;
   overflow: hidden;
   box-shadow:
