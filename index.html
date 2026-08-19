@@ -3,273 +3,532 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Manutenção — André Tratamento Oriental</title>
-
-  <!-- Favicon & Web App Fullscreen (PWA Standalone) -->
+  <title>André Tratamento Oriental — Cartão Fora do Ar</title>
+  
+  <!-- Favicon & Web App Capable -->
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="manifest" href="manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="André Oriental">
   <meta name="theme-color" content="#080808">
-
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-
-  <!-- CSS Customizado -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="André Tratamento Oriental — o cartão virtual está passando por uma manutenção temporária. Pedimos desculpas pelo inconveniente.">
-  <meta property="og:title" content="André Tratamento Oriental — Em Manutenção">
-  <meta property="og:description" content="Estamos ajustando os detalhes. Pedimos desculpas pelo inconveniente.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="logo.png">
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  
   <style>
-    /* ==========================================================================
-       ESTILOS EXCLUSIVOS — PÁGINA DE MANUTENÇÃO
-       (herda o design system do style.css)
-       ========================================================================== */
+    :root {
+      --color-bg: #080808;
+      --color-gold: oklch(0.82 0.14 85); /* Dourado brilhante luxuoso */
+      --color-gold-glow: rgba(212, 175, 55, 0.3);
+      --color-text-main: #FFFFFF;
+      --color-text-muted: rgba(255, 255, 255, 0.7);
+      --color-glass-bg: rgba(18, 18, 18, 0.65);
+      --color-glass-border: rgba(255, 255, 255, 0.12);
+      
+      --font-serif-body: 'Lora', serif;
+      --font-serif-display: 'Playfair Display', serif;
+      --font-serif-elegant: 'Cormorant Garamond', serif;
+    }
 
-    /* Pill de status "Em manutenção" */
-    .mnt-status {
-      display: inline-flex;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
+      background-color: var(--color-bg);
+      font-family: var(--font-serif-body);
+      color: var(--color-text-main);
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 9px;
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      color: var(--color-gold);
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin: 6px 0 22px;
-      box-shadow: 0 0 24px rgba(212, 175, 55, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .mnt-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #ffb347;
-      box-shadow: 0 0 10px rgba(255, 179, 71, 0.85);
-      animation: mntBlink 1.3s ease-in-out infinite;
+    /* Background premium dinâmico */
+    body {
+      background-image: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.12) 0%, rgba(8, 8, 8, 0) 60%), url('background.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      padding: 20px;
     }
 
-    /* Engrenagem girando lentamente */
-    .mnt-gear {
-      width: 64px;
-      height: 64px;
-      color: var(--color-gold);
-      filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.45));
-      animation: mntSpin 14s linear infinite;
-      margin: 0 auto 4px;
-    }
-
-    /* Anel orbital decorativo */
-    .mnt-orbit {
+    body::before {
+      content: '';
       position: absolute;
-      inset: -16px;
-      border-radius: 50%;
-      border: 1px dashed rgba(212, 175, 55, 0.28);
-      animation: mntSpin 40s linear infinite;
-      z-index: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 8, 8, 0.3);
+      z-index: 1;
+    }
+
+    /* Container Principal com Efeito Glassmorphic 3D */
+    .maintenance-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 420px;
+      padding: 40px 28px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(22, 22, 22, 0.8) 0%, rgba(10, 10, 10, 0.7) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.7),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      animation: fadeIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    /* Reflexo de Luz Superior no Container 3D */
+    .maintenance-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
+      border-radius: 28px 28px 0 0;
       pointer-events: none;
     }
 
-    .mnt-title {
-      font-family: var(--font-serif-display);
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--color-gold);
-      line-height: 1.35;
-      margin: 20px 0 10px;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    /* Logo oficial com glow */
+    .logo-wrapper {
+      position: relative;
+      margin-bottom: 28px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .mnt-text {
-      font-size: 0.9rem;
-      line-height: 1.65;
-      color: var(--color-text-paragraph);
+    .logo-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      z-index: 1;
+      filter: blur(8px);
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    .logo-image {
+      width: 200px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+      position: relative;
+      z-index: 2;
+      animation: pulseLogo 4s infinite ease-in-out;
+    }
+
+    /* Tipografia */
+    .title {
+      font-family: var(--font-serif-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0) 0%, var(--color-gold) 50%, rgba(212, 175, 55, 0) 100%);
+      margin: 18px auto;
+    }
+
+    .message {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text-main);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .apology {
+      font-family: var(--font-serif-elegant);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--color-text-muted);
       margin-bottom: 12px;
     }
 
-    /* Barra de progresso "trabalhando" */
-    .mnt-progress {
-      width: 100%;
-      max-width: 240px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
+    .footer {
+      margin-top: 24px;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.5px;
+    }
+
+    /* Animações */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.03);
+      }
+    }
+
+    /* Botão SAIBA MAIS */
+    .btn-saiba-mais {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 12px 28px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.88) 0%, rgba(230, 230, 230, 0.72) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      color: #1F1B16;
+      font-family: var(--font-serif-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.22),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.12);
+      position: relative;
       overflow: hidden;
-      margin: 16px auto 0;
+    }
+
+    .btn-saiba-mais::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 48%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .btn-saiba-mais:active {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 240, 240, 0.88) 100%);
+      border-color: rgba(212, 175, 55, 0.8);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.28),
+        inset 0 2px 2px rgba(255, 255, 255, 1),
+        inset 0 -2px 6px rgba(212, 175, 55, 0.25);
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 400px;
+      max-height: 82vh;
+      border-radius: 24px;
+      overflow-y: auto;
+      transform: scale(0.92);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, rgba(22, 22, 22, 0.8) 0%, rgba(10, 10, 10, 0.7) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.7),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.5);
       position: relative;
     }
 
-    /* Sem botão flutuante: centraliza o texto do rodapé */
-    .footer-inner {
-      padding-right: 0;
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
     }
 
-    .mnt-progress span {
-      display: block;
-      height: 100%;
-      width: 45%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--color-gold-deep), var(--color-gold-soft), var(--color-gold-deep));
-      background-size: 220% 100%;
-      animation: mntShimmer 1.6s ease-in-out infinite alternate;
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
+      border-radius: 24px 24px 0 0;
+      pointer-events: none;
     }
 
-    /* Ações de contato */
-    .mnt-actions {
+    .modal-header {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 4px;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      transition: color 0.3s ease;
+    }
+
+    .btn-close:active {
+      color: #ffffff;
+    }
+
+    .btn-close svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    .modal-body {
+      position: relative;
+      z-index: 2;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif-display);
+      font-size: 1.3rem;
+      color: var(--color-gold);
+      line-height: 1.35;
+      margin-bottom: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .modal-text {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 14px;
+    }
+
+    .modal-text.message-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+    }
+
+    .modal-text.message-quote {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid var(--color-gold);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.84rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.92);
+      margin-bottom: 16px;
+      white-space: pre-line;
+    }
+
+    .modal-text.pix-info {
+      font-family: var(--font-serif-display);
+      font-weight: 600;
+      text-align: center;
+      color: var(--color-gold);
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .modal-actions {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 26px;
+      gap: 10px;
+      margin-top: 4px;
     }
 
-    .mnt-btn {
+    .btn-action {
       width: 100%;
-      padding: 13px;
-      border-radius: 13px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
       font-family: var(--font-serif-body);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
+      gap: 8px;
       cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s var(--ease-spring);
+      transition: all 0.3s ease;
     }
 
-    .mnt-btn svg {
-      width: 17px;
-      height: 17px;
-      stroke: currentColor;
+    .btn-action:active {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--color-gold);
     }
 
-    .mnt-btn-ghost {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--color-text-muted);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    /* Scrollbar do modal */
+    .modal-content::-webkit-scrollbar {
+      width: 4px;
     }
 
-    .mnt-btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(212, 175, 55, 0.4);
-      color: var(--color-white);
-      transform: translateY(-1px);
+    .modal-content::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 2px;
     }
 
-    /* Animações exclusivas */
-    @keyframes mntSpin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes mntBlink {
-      0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.35;
-        transform: scale(0.8);
-      }
-    }
-
-    @keyframes mntShimmer {
-      from {
-        background-position: 0% 0;
-      }
-      to {
-        background-position: 100% 0;
-      }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.25);
+      border-radius: 2px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Tela de Abertura Estática (mesmo padrão do cartão principal) -->
-  <div id="loader-screen" class="loader-screen" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100svh; z-index: 999999; background: #080808; display: flex; align-items: center; justify-content: center; contain: strict;">
-    <div class="loader-content">
-      <div class="loader-logo-wrapper">
-        <img src="logo.webp" alt="André Tratamento Oriental" class="loader-logo">
+  <main class="maintenance-container">
+    <header class="logo-wrapper">
+      <img src="logo.webp" alt="André Tratamento Oriental Logo" class="logo-image">
+    </header>
+    
+    <h1 class="title">Cartão Fora do Ar</h1>
+    <div class="divider"></div>
+    
+    <p class="message">
+      Por motivos de falta de respeito do contratante e tentativas frustradas de contato para o recebimento do pagamento devido, o cartão interativo ficará fora do ar por tempo indeterminado ou até que a pendência seja resolvida.
+    </p>
+    <p class="apology">
+      Desculpe pelo transtorno.
+    </p>
+
+    <button class="btn-saiba-mais" onclick="openModal('aviso')">
+      SAIBA MAIS
+    </button>
+    
+    <footer class="footer">
+      &copy; André Tratamento Oriental &bull; 2026
+    </footer>
+  </main>
+
+  <!-- Modal: Aviso -->
+  <div class="modal-overlay" id="modal-aviso" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="btn-close" onclick="closeModal()" aria-label="Fechar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
-      <p class="loader-slogan font-elegant">Aqui começa a sua saúde</p>
+      <div class="modal-body">
+        <h2 class="modal-title">Aviso Importante</h2>
+
+        <p class="modal-text message-label">
+          APÓS TENTATIVAS FRUSTRADAS DE ENTRAR EM CONTATO COM O "CONTRATANTE" ESTA FOI A ÚLTIMA MENSAGEM ENVIADA PELO "CONTRATADO" EM 18/08/2026 ÀS 18:29H:
+        </p>
+
+        <div class="modal-text message-quote">Boa noite.
+Vou ser direto porque essa situação já está me deixando bastante chateado.
+
+Eu fiz o trabalho que você me pediu e entreguei tudo conforme combinamos. Você me passou prazos para o pagamento — primeiro sexta, depois domingo ou segunda — e eu respeitei todos eles.
+
+Quando percebi que talvez estivesse difícil pagar o valor inteiro, ainda tentei facilitar, propondo que você me passasse pelo menos metade e acertasse o restante depois. Nem isso teve resposta.
+
+Eu entendo que você esteja trabalhando muito e fazendo plantões longos, mas também preciso que você entenda o meu lado. Já se passaram alguns dias, as mensagens são visualizadas e, quando tenho alguma resposta, geralmente é algo curto como "vou pagar" ou uma resposta bastante fria, mas sem uma definição concreta. Você sabe que esse pagamento é importante para mim.
+
+O que me chateia não é apenas o atraso. É ter cumprido a minha parte, ter tido paciência com os prazos que você me passou e, ainda assim, sentir que meu trabalho está sendo deixado de lado.
+
+Só quero deixar claro que fiz tudo o que foi combinado e esperei o suficiente por uma solução. Acho justo ter, da sua parte, a mesma consideração que tive com você.</div>
+
+        <p class="modal-text pix-info">Chave Pix:<br>******@gmail.com</p>
+
+        <div class="modal-actions">
+          <button class="btn-action" onclick="closeModal()">Voltar</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Overlay de Fundo -->
-  <div class="bg-overlay"></div>
+  <script>
+    function openModal() {
+      document.getElementById('modal-aviso').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-  <!-- Cartão de Manutenção -->
-  <main class="card-container glass-effect" id="main-card">
-    <span class="edge-light" aria-hidden="true"></span>
+    function closeModal() {
+      document.getElementById('modal-aviso').classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
-    <!-- Cabeçalho / Logo -->
-    <header class="header-section">
-      <div class="logo-wrapper">
-        <span class="mnt-orbit" aria-hidden="true"></span>
-        <img src="logo.webp" alt="André Tratamento Oriental" class="logo-image">
-      </div>
-      <h1 class="slogan font-elegant">Equilíbrio e Bem-Estar</h1>
-    </header>
+    function closeModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeModal();
+      }
+    }
 
-    <!-- Status -->
-    <div class="mnt-status" role="status" aria-label="Em manutenção">
-      <span class="mnt-dot" aria-hidden="true"></span>
-      <span>Em manutenção</span>
-    </div>
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
 
-    <!-- Engrenagem animada -->
-    <svg class="mnt-gear" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-      <circle cx="12" cy="12" r="3"></circle>
-    </svg>
-
-    <h2 class="mnt-title">Estamos ajustando os detalhes</h2>
-    <p class="mnt-text">Nosso cartão virtual está passando por uma manutenção temporária para oferecer a melhor experiência possível.</p>
-    <p class="mnt-text">Pedimos desculpas pelo inconveniente. Estamos trabalhando com todo o cuidado e, em breve, tudo voltará ao normal.</p>
-
-    <!-- Barra de progresso "trabalhando" -->
-    <div class="mnt-progress" aria-hidden="true"><span></span></div>
-
-    <!-- Ações de contato -->
-    <div class="mnt-actions">
-      <a class="mnt-btn mnt-btn-ghost" href="https://www.instagram.com/idia_marketingvisual/" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-        Conheça a ID:IA Marketing Visual
-      </a>
-    </div>
-  </main>
-
-  <!-- RODAPÉ FIXO -->
-  <footer class="fixed-footer">
-    <div class="footer-inner">
-      <div class="copyright">
-        &copy; André Tratamento Oriental &bull; 2026<br>Criado por <a href="https://www.instagram.com/idia_marketingvisual/" target="_blank" rel="noopener noreferrer" class="credit-link">ID:IA Marketing Visual</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- JavaScript Interativo (mesmo do cartão principal: preloader + content-ready) -->
-  <script src="script.js" defer></script>
 </body>
 </html>

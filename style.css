@@ -1,38 +1,24 @@
 /* ==========================================================================
    DESIGN SYSTEM - ANDRÉ TRATAMENTO ORIENTAL (Virtual Premium Card)
-   Glassmorphism noturno realista - v2
    ========================================================================== */
 
 /* Cores e Tokens */
 :root {
-  /* Fallbacks hex + oklch moderno */
-  --color-gold: #d4af37;
-  --color-gold: oklch(0.82 0.14 85);
-  --color-gold-soft: #e8c96a;
-  --color-gold-soft: oklch(0.86 0.12 88);
-  --color-gold-deep: #9a761e;
-  --color-gold-deep: oklch(0.62 0.11 60);
-
+  --color-bg-overlay: rgba(255, 255, 255, 0.05);
+  --color-modal-overlay: rgba(0, 0, 0, 0.75);
+  --color-glass-bg: rgba(18, 18, 18, 0.65); /* Vidro jateado preto semi-transparente */
+  --color-glass-border: rgba(255, 255, 255, 0.14);
+  --color-glass-hover-bg: rgba(255, 255, 255, 0.12);
+  --color-glass-hover-border: rgba(212, 175, 55, 0.45);
+  --color-gold: oklch(0.82 0.14 85); /* Dourado brilhante luxuoso */
   --color-white: #ffffff;
-  --color-ink: #f4f6fb;
-  --color-night-1: #05070d;
-  --color-night-2: #0a0e1a;
-
-  --color-glass-bg: rgba(18, 21, 34, 0.55);
-  --color-glass-border: rgba(255, 255, 255, 0.15);
-  --color-glass-border-strong: rgba(255, 255, 255, 0.24);
-  --color-glass-highlight: rgba(255, 255, 255, 0.24);
-
-  --color-text-main: #f2f4fa;
-  --color-text-muted: rgba(242, 244, 250, 0.74);
-  --color-text-paragraph: rgba(242, 244, 250, 0.9);
-
+  --color-text-main: #FFFFFF; /* Texto branco no vidro escuro */
+  --color-text-muted: rgba(255, 255, 255, 0.75);
+  --color-text-paragraph: rgba(255, 255, 255, 0.9);
+  
   --font-serif-body: 'Lora', serif;
   --font-serif-display: 'Playfair Display', serif;
   --font-serif-elegant: 'Cormorant Garamond', serif;
-
-  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
-  --radius-card: 30px;
 }
 
 /* Reset e Configurações Básicas */
@@ -52,62 +38,20 @@ html, body {
 
 body {
   font-family: var(--font-serif-body);
-  color: var(--color-text-main);
-  /* Camadas noturnas: brilhos ambientes + imagem de fundo */
-  background-color: var(--color-night-1);
-  background-image:
-    radial-gradient(120% 90% at 12% -8%, rgba(78, 52, 140, 0.34), transparent 55%),
-    radial-gradient(120% 100% at 95% 8%, rgba(212, 175, 55, 0.14), transparent 50%),
-    radial-gradient(140% 110% at 50% 120%, rgba(16, 80, 110, 0.38), transparent 60%),
-    url('background.webp');
+  background-image: url('background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
+  color: var(--color-text-main);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 20px 16px 96px 16px; /* Padding inferior para não cobrir com o rodapé fixo */
+  padding: 24px 16px 100px 16px; /* Padding inferior para não cobrir com o rodapé fixo */
 }
 
-/* Grão (film grain) para realismo do vidro */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-}
-
-/* Vignette cinematográfico + leve escurecimento noturno */
-.bg-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(120% 120% at 50% 0%, transparent 55%, rgba(0, 0, 0, 0.55) 100%),
-    linear-gradient(180deg, rgba(5, 7, 13, 0.12) 0%, rgba(5, 7, 13, 0.4) 100%);
-}
-
-/* Tipografia auxiliar */
-.font-display {
-  font-family: var(--font-serif-display);
-}
-
-.font-elegant {
-  font-family: var(--font-serif-elegant);
-}
-
-/* ==========================================================================
-   TELA DE ABERTURA (3s)
-   ========================================================================== */
+/* Tela de Abertura Estática (3s) */
 .loader-screen {
   position: fixed;
   top: 0;
@@ -116,10 +60,7 @@ body::after {
   height: 100%;
   height: 100svh;
   z-index: 999999;
-  background:
-    radial-gradient(90% 70% at 50% 38%, rgba(212, 175, 55, 0.07) 0%, transparent 60%),
-    radial-gradient(100% 80% at 50% 110%, rgba(16, 80, 110, 0.22), transparent 60%),
-    #05060b;
+  background: #080808;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,38 +86,15 @@ body::after {
 }
 
 .loader-logo-wrapper {
-  position: relative;
-  margin-bottom: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Halo dourado pulsante atrás do logo */
-.loader-logo-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 330px;
-  max-width: 92vw;
-  height: 330px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.05) 45%, transparent 68%);
-  animation: loaderGlow 2.6s ease-in-out infinite;
-  pointer-events: none;
+  margin-bottom: 20px;
 }
 
 .loader-logo {
-  width: 270px;
-  max-width: 82vw;
+  width: 280px;
+  max-width: 85vw;
   height: auto;
   object-fit: contain;
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.65));
-  animation: logoFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.6));
 }
 
 .loader-slogan {
@@ -184,202 +102,150 @@ body::after {
   font-size: 1.5rem;
   font-style: italic;
   color: var(--color-gold);
+  margin-bottom: 0;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.35);
-  opacity: 0;
-  animation: riseIn 0.9s 0.3s var(--ease-spring) forwards;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
-/* ==========================================================================
-   GLASS EFFECT BASE
-   ========================================================================== */
+/* Overlay Geral de Fundo */
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg-overlay);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Tipografia */
+.font-display {
+  font-family: var(--font-serif-display);
+}
+
+.font-elegant {
+  font-family: var(--font-serif-elegant);
+}
+
+/* Efeito Glassmorphism Premium */
 .glass-effect {
-  position: relative;
   background: var(--color-glass-bg);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-glass-border);
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
-/* ==========================================================================
-   CARTÃO PRINCIPAL
-   ========================================================================== */
+/* Container Central em Vidro Jateado 3D */
 .card-container {
   width: 100%;
   max-width: 400px;
-  border-radius: var(--radius-card);
-  padding: 26px 18px 24px;
+  border-radius: 28px;
+  padding: 32px 18px;
   z-index: 10;
   text-align: center;
   position: relative;
   overflow: hidden;
-  isolation: isolate;
-  background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 30%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.06) 100%),
-    linear-gradient(160deg, rgba(26, 29, 48, 0.6) 0%, rgba(10, 12, 22, 0.48) 100%);
-  backdrop-filter: blur(30px) saturate(165%);
-  -webkit-backdrop-filter: blur(30px) saturate(165%);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  box-shadow:
-    0 50px 100px -20px rgba(0, 0, 0, 0.78),
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, rgba(22, 22, 22, 0.72) 0%, rgba(8, 8, 8, 0.62) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px) scale(0.98);
-  transition:
-    opacity 0.9s var(--ease-spring),
-    transform 0.9s var(--ease-spring),
-    visibility 0.9s;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 body.content-ready .card-container {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
 }
 
-/* Lavagem de luz no topo (vidro realista) */
+/* Reflexo de Luz Superior no Container 3D */
 .card-container::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 42%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: var(--radius-card) var(--radius-card) 0 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Reflexo diagonal (glare) do vidro */
-.card-container::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -38%;
-  width: 55%;
-  height: 200%;
-  background: linear-gradient(105deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.055) 45%, rgba(255, 255, 255, 0) 70%);
-  transform: rotate(18deg);
-  filter: blur(4px);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Borda superior brilhante (edge light) */
-.card-container .edge-light {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 8%;
-  right: 8%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  z-index: 3;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 28px 28px 0 0;
   pointer-events: none;
 }
 
-/* ==========================================================================
-   HEADER / LOGO
-   ========================================================================== */
+/* Header */
 .header-section {
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 3;
-}
-
-body.content-ready .logo-wrapper {
-  animation: riseIn 0.7s var(--ease-spring) backwards;
+  margin-bottom: 24px;
 }
 
 .logo-wrapper {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Glow escuro + anel dourado sutil atrás do logo */
+/* Gradiente Preto Suave Atrás do Logotipo */
 .logo-wrapper::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 220px;
-  height: 220px;
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(6, 7, 12, 0.82) 0%, rgba(6, 7, 12, 0.38) 52%, rgba(212, 175, 55, 0.06) 76%, transparent 84%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 75%);
   z-index: 1;
   pointer-events: none;
-  filter: blur(8px);
+  filter: blur(10px);
 }
 
 .logo-image {
-  width: 180px;
-  height: 180px;
+  width: 240px;
+  height: 240px;
   object-fit: contain;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.65));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
   max-width: 100%;
   position: relative;
   z-index: 2;
 }
 
-body.content-ready .slogan {
-  animation: riseIn 0.7s 0.06s var(--ease-spring) backwards;
-}
-
 .slogan {
   font-family: var(--font-serif-elegant);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-style: italic;
   font-weight: 500;
   color: var(--color-gold);
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.55), 0 0 26px rgba(212, 175, 55, 0.3);
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 2;
 }
 
-/* ==========================================================================
-   MENU DE BOTÕES (Grid 2 por Linha)
-   ========================================================================== */
+/* Menu de Botões (Grid 2 por Linha) */
 .menu-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  position: relative;
-  z-index: 3;
 }
-
-body.content-ready .btn-menu {
-  animation: riseIn 0.6s var(--ease-spring) backwards;
-}
-body.content-ready .btn-menu:nth-child(1) { animation-delay: 0.04s; }
-body.content-ready .btn-menu:nth-child(2) { animation-delay: 0.09s; }
-body.content-ready .btn-menu:nth-child(3) { animation-delay: 0.14s; }
-body.content-ready .btn-menu:nth-child(4) { animation-delay: 0.19s; }
-body.content-ready .btn-menu:nth-child(5) { animation-delay: 0.24s; }
-body.content-ready .btn-menu:nth-child(6) { animation-delay: 0.29s; }
-body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 
 .btn-menu {
   width: 100%;
-  padding: 8px 6px;
+  padding: 10px 6px;
   border-radius: 12px;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.09) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: var(--color-text-main);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88) 0%, rgba(230, 230, 230, 0.72) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #1F1B16;
   font-family: var(--font-serif-body);
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-weight: 600;
   display: flex;
   flex-direction: column;
@@ -387,61 +253,76 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   justify-content: center;
   gap: 5px;
   cursor: pointer;
-  transition: all 0.3s var(--ease-spring);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   text-align: center;
   outline: none;
-  height: 62px;
+  min-height: 64px;
   position: relative;
   overflow: hidden;
-  box-shadow:
-    0 8px 20px -6px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 
+    0 8px 18px rgba(0, 0, 0, 0.22),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.12);
 }
 
-/* Reflexo de vidro no topo do botão */
+/* Reflexo de Vidro nos Cantos dos Botões 3D */
 .btn-menu::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 45%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 100%);
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
   border-radius: 12px 12px 0 0;
-  z-index: 0;
 }
 
-.btn-menu > * {
-  position: relative;
-  z-index: 1;
-}
-
-.btn-menu:hover,
-.btn-menu:active {
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.17) 0%, rgba(255, 255, 255, 0.07) 45%, rgba(255, 255, 255, 0.12) 100%);
-  border-color: rgba(212, 175, 55, 0.55);
+.btn-menu:active, .btn-menu:hover {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 240, 240, 0.88) 100%);
+  border-color: rgba(212, 175, 55, 0.8);
   transform: translateY(-2px) scale(1.02);
-  box-shadow:
-    0 14px 28px -8px rgba(0, 0, 0, 0.62),
-    0 0 20px rgba(212, 175, 55, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.28),
+    inset 0 2px 2px rgba(255, 255, 255, 1),
+    inset 0 -2px 6px rgba(212, 175, 55, 0.25);
 }
 
-/* Ícones dourados com brilho sutil */
+/* Botão CTA Destacado 3D para o WhatsApp */
+.btn-cta {
+  background: linear-gradient(145deg, rgba(225, 185, 55, 0.95) 0%, rgba(165, 125, 30, 0.9) 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 245, 200, 0.6) !important;
+  font-weight: 600 !important;
+  box-shadow: 
+    0 10px 22px rgba(212, 175, 55, 0.4),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.25) !important;
+}
+
+.btn-cta:active, .btn-cta:hover {
+  background: linear-gradient(145deg, rgba(240, 200, 65, 1) 0%, rgba(180, 135, 35, 0.98) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 
+    0 14px 28px rgba(212, 175, 55, 0.55),
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-cta svg {
+  stroke: #ffffff !important;
+}
+
 .btn-menu svg {
   width: 20px;
   height: 20px;
-  stroke: var(--color-gold);
+  stroke: #8B6914; /* Dourado escuro para alto contraste no fundo branco */
   flex-shrink: 0;
-  transition: transform 0.3s var(--ease-spring);
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.3));
+  transition: transform 0.3s ease;
 }
 
 .btn-menu:hover svg {
-  transform: scale(1.18) rotate(-6deg);
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+  transform: scale(1.15);
 }
 
 .btn-text {
@@ -449,51 +330,17 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   word-break: break-word;
 }
 
-/* Botão CTA dourado premium */
-.btn-cta {
-  background: linear-gradient(140deg, #f0c14b 0%, #d4a92f 45%, #a8781f 100%) !important;
-  color: #201705 !important;
-  border: 1px solid rgba(255, 243, 190, 0.65) !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.3px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-  box-shadow:
-    0 12px 30px -8px rgba(212, 175, 55, 0.55),
-    0 0 24px rgba(212, 175, 55, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.75),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.28) !important;
-}
-
-.btn-cta:hover,
-.btn-cta:active {
-  background: linear-gradient(140deg, #ffd75e 0%, #e0b53a 45%, #b5851f 100%) !important;
-  border-color: rgba(255, 255, 255, 0.9) !important;
-  box-shadow:
-    0 16px 34px -8px rgba(212, 175, 55, 0.7),
-    0 0 32px rgba(212, 175, 55, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.3) !important;
-}
-
-.btn-cta svg {
-  stroke: #201705 !important;
-  filter: none !important;
-}
-
-/* ==========================================================================
-   RODAPÉ FIXO
-   ========================================================================== */
+/* Rodapé Fixo Ultra-Slim */
 .fixed-footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 99;
-  background: rgba(8, 9, 14, 0.82);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
   padding: 6px 16px;
   display: flex;
   align-items: center;
@@ -505,14 +352,16 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   width: 100%;
   max-width: 480px;
   text-align: center;
-  padding-right: 46px;
+  padding-right: 46px; /* Abre espaço para o botão do WhatsApp à direita */
 }
 
 .copyright {
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.88);
   letter-spacing: 0.3px;
-  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .credit-link {
@@ -523,33 +372,31 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 }
 
 .credit-link:hover {
-  color: var(--color-gold-soft);
+  color: #ffffff;
   text-decoration: underline;
 }
 
-/* Botão flutuante animado do WhatsApp */
+/* Ícone Flutuante Animado do WhatsApp à Direita */
 .floating-whatsapp {
   position: absolute;
   right: 14px;
-  bottom: 8px;
-  width: 44px;
-  height: 44px;
+  bottom: 6px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 6px 18px rgba(37, 211, 102, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.5);
   animation: pulseWhatsapp 2s infinite ease-in-out;
   z-index: 100;
   transition: transform 0.3s ease;
 }
 
 .floating-whatsapp:hover {
-  transform: scale(1.14);
+  transform: scale(1.12);
 }
 
 .floating-whatsapp svg {
@@ -562,26 +409,24 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 @keyframes pulseWhatsapp {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.55), 0 0 0 0 rgba(37, 211, 102, 0.45);
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.5), 0 0 0 0 rgba(37, 211, 102, 0.4);
   }
   50% {
     transform: scale(1.08);
-    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.8), 0 0 0 9px rgba(37, 211, 102, 0);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.75), 0 0 0 8px rgba(37, 211, 102, 0);
   }
 }
 
-/* ==========================================================================
-   MODAIS
-   ========================================================================== */
+/* Popups (Modais) */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-modal-overlay, rgba(0, 0, 0, 0.8));
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  background: var(--color-modal-overlay);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 50;
   display: flex;
   justify-content: center;
@@ -597,62 +442,33 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   pointer-events: auto;
 }
 
-.modal-overlay.closing {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.modal-overlay.closing .modal-content {
-  animation: modalToDepth 0.4s var(--ease-spring) forwards;
-}
-
 .modal-content {
   width: 100%;
   max-width: 360px;
   max-height: 80vh;
   border-radius: 24px;
   overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
-  transform-origin: center;
-  will-change: transform, opacity;
-  padding: 26px 24px;
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 45%),
-    linear-gradient(160deg, rgba(26, 29, 48, 0.92) 0%, rgba(10, 12, 22, 0.94) 100%) !important;
-  backdrop-filter: blur(30px) saturate(165%) !important;
-  -webkit-backdrop-filter: blur(30px) saturate(165%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow:
-    0 40px 90px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
-}
-
-/* Borda superior luminosa do modal */
-.modal-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-  pointer-events: none;
+  /* Jato de Areia Escuro / Preto */
+  background: rgba(18, 18, 18, 0.88) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
 }
 
 .modal-overlay.active .modal-content {
-  animation: modalFromDepth 0.5s var(--ease-spring) both;
+  transform: scale(1);
 }
 
 .modal-header {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
 }
 
 .btn-close {
@@ -664,14 +480,11 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   align-items: center;
   justify-content: center;
   padding: 4px;
-  border-radius: 50%;
-  transition: color 0.3s ease, background 0.3s ease, transform 0.3s var(--ease-spring);
+  transition: color 0.3s ease;
 }
 
 .btn-close:hover {
-  color: var(--color-gold-soft);
-  background: rgba(255, 255, 255, 0.08);
-  transform: rotate(90deg);
+  color: var(--color-white);
 }
 
 .btn-close svg {
@@ -682,8 +495,6 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 
 .modal-body {
   padding-bottom: 8px;
-  position: relative;
-  z-index: 1;
 }
 
 .modal-title {
@@ -693,24 +504,23 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   line-height: 1.35;
   margin-bottom: 16px;
   font-weight: 600;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
 }
 
 .modal-text {
   font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--color-text-paragraph);
-  margin-bottom: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88); /* Texto claro no modal escuro */
+  margin-bottom: 20px;
 }
 
-/* Detalhes de endereço (mantidos por segurança, sem uso no HTML) */
+/* Detalhes de Endereço (Removidos no HTML, mantido estilo por segurança) */
 .address-details {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 24px;
   font-size: 0.88rem;
-  color: var(--color-text-paragraph);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .address-tag {
@@ -720,26 +530,26 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 
 .address-subtag {
   font-size: 0.78rem;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* Ações do modal */
+/* Botões do Modal */
 .modal-actions {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .btn-action {
   width: 100%;
-  padding: 13px;
-  border-radius: 13px;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--color-white);
   font-family: var(--font-serif-body);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -748,40 +558,35 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .btn-action:hover {
-  background: linear-gradient(150deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.06) 100%);
-  border-color: rgba(212, 175, 55, 0.5);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-gold);
 }
 
 .btn-action svg {
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   stroke: var(--color-gold);
 }
 
 .btn-back {
-  background: rgba(255, 255, 255, 0.03);
+  background: none;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--color-text-muted);
-  box-shadow: none;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .btn-back:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--color-white);
 }
 
-/* ==========================================================================
-   ANIMAÇÕES E ACESSIBILIDADE
-   ========================================================================== */
-@keyframes riseIn {
+/* Animações e Efeitos */
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -789,35 +594,7 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
   }
 }
 
-@keyframes loaderGlow {
-  0%, 100% {
-    opacity: 0.7;
-    transform: translate(-50%, -50%) scale(0.96);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.06);
-  }
-}
-
-@keyframes logoFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-7px);
-  }
-}
-
-.btn-menu:focus-visible,
-.btn-action:focus-visible,
-.btn-close:focus-visible,
-.credit-link:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
-}
-
-/* Scrollbar dos modais */
+/* Scrollbar personalizada para modais */
 .modal-content::-webkit-scrollbar {
   width: 4px;
 }
@@ -828,59 +605,10 @@ body.content-ready .btn-menu:nth-child(7) { animation-delay: 0.34s; }
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.25);
   border-radius: 2px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 175, 55, 0.45);
-}
-
-@keyframes modalFromDepth {
-  0% {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(14px);
-  }
-  55% {
-    opacity: 1;
-    transform: scale(1.03);
-    filter: blur(2px);
-  }
-  80% {
-    transform: scale(0.99);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes modalToDepth {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-  45% {
-    opacity: 1;
-    transform: scale(1.02);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(14px);
-  }
-}
-
-/* Respeita usuários que preferem menos movimento */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  background: rgba(212, 175, 55, 0.4);
 }
